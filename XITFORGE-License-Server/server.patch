@@ -1,0 +1,146 @@
+--- a/server.js
++++ b/server.js
+@@ -3,6 +3,7 @@
+ const path = require('path');
+ const { Pool } = require('pg');
+ const { registerOptionsRoutes } = require('./options-routes');
++const { registerFreeKeyRoutes, licenseDurationSeconds } = require('./free-key-routes');
+ 
+ const app = express();
+ 
+@@ -107,6 +108,9 @@
+ 
+       ALTER TABLE licenses
+       ADD COLUMN IF NOT EXISTS first_used_at TIMESTAMPTZ NULL;
++
++      ALTER TABLE licenses
++      ADD COLUMN IF NOT EXISTS duration_seconds BIGINT NULL;
+     `);
+ 
+     /*
+@@ -651,6 +655,7 @@
+           status,
+           expires_at,
+           duration_days,
++          duration_seconds,
+           first_used_at,
+           device_limit,
+           note,
+@@ -674,16 +679,12 @@
+     return license;
+   }
+ 
+-  const durationDays =
+-    Number(
+-      license.duration_days
+-    );
++  const durationSeconds = licenseDurationSeconds(license);
+ 
+   const mustStart =
+     !license.expires_at &&
+     !license.first_used_at &&
+-    Number.isInteger(durationDays) &&
+-    durationDays > 0 &&
++    durationSeconds > 0 &&
+     (
+       license.status === 'new' ||
+       license.status === 'active'
+@@ -699,11 +700,7 @@
+   const expiresAt =
+     new Date(
+       Date.now() +
+-      durationDays *
+-        24 *
+-        60 *
+-        60 *
+-        1000
++      durationSeconds * 1000
+     ).toISOString();
+ 
+   /*
+@@ -722,7 +719,7 @@
+         WHERE id = $3
+           AND expires_at IS NULL
+           AND first_used_at IS NULL
+-          AND duration_days IS NOT NULL
++          AND (duration_days IS NOT NULL OR duration_seconds IS NOT NULL)
+         RETURNING
+           id,
+           key_prefix,
+@@ -730,6 +727,7 @@
+           status,
+           expires_at,
+           duration_days,
++          duration_seconds,
+           first_used_at,
+           device_limit,
+           note,
+@@ -757,6 +755,7 @@
+           status,
+           expires_at,
+           duration_days,
++          duration_seconds,
+           first_used_at,
+           device_limit,
+           note,
+@@ -1546,6 +1545,7 @@
+               l.status,
+               l.expires_at,
+               l.duration_days,
++              l.duration_seconds,
+               l.first_used_at,
+               l.device_limit,
+               l.note,
+@@ -1834,6 +1834,7 @@
+             SELECT
+               expires_at,
+               duration_days,
++              duration_seconds,
+               first_used_at
+             FROM licenses
+             WHERE id = $1
+@@ -1957,6 +1958,7 @@
+             SELECT
+               expires_at,
+               duration_days,
++              duration_seconds,
+               first_used_at
+             FROM licenses
+             WHERE id = $1
+@@ -1980,6 +1982,16 @@
+ 
+       const row =
+         result.rows[0];
++
++      // Preserve the remaining duration of an unused hourly license.
++      if (!row.expires_at && !row.first_used_at && row.duration_seconds != null) {
++        const updated = await pool.query(`
++          UPDATE licenses SET duration_seconds = duration_seconds + $1, updated_at = $2
++          WHERE id = $3 RETURNING duration_seconds
++        `, [days * 86400, nowIso(), id]);
++        return res.json({ ok: true, expiresAt: null,
++          durationSeconds: Number(updated.rows[0].duration_seconds), startsOnFirstUse: true });
++      }
+ 
+       const neverUsed =
+         !row.expires_at &&
+@@ -2617,6 +2629,11 @@
+ 
+ let optionsDatabaseReady = null;
+ 
++const freeKeysModule = registerFreeKeyRoutes({
++  app, pool, rateLimit, generateKey, normalizeKey, hashValue,
++  secret: process.env.FREE_KEYS_SECRET || ADMIN_TOKEN_SECRET
++});
++
+ try {
+ 
+   const optionsModule =
+@@ -2665,6 +2682,7 @@
+   try {
+ 
+     await initializeDatabase();
++    await freeKeysModule.ensureTables();
+ 
+     /*
+      * Esperar también a que la tabla
