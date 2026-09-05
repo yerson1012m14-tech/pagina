@@ -1,0 +1,44 @@
+XITFORGE — página con dos ediciones para iOS
+
+PARA USAR LA PÁGINA
+Descomprime XITFORGE_web.zip y sube index.html junto con la carpeta ipas
+al mismo directorio de tu alojamiento web. Conserva los nombres de los IPA.
+No subas solamente el HTML: los botones necesitan también los archivos IPA.
+Puedes abrir index.html en tu PC para revisar el contenido antes de subirlo.
+
+QUÉ SE MANTIENE
+Fondo, animaciones, logo, menú, colores y estilos anteriores.
+Grupo de WhatsApp e Instagram con sus enlaces anteriores.
+El botón COMPRAR vuelve a usar el mismo enlace de WhatsApp.
+No se ha añadido registro de IP, proxy ni comprobación de puertos.
+
+DESCARGA E INSTALACIÓN
+Los botones descargan los IPA; no instalan automáticamente la aplicación.
+Los archivos entregados no contienen embedded.mobileprovision.
+Para instalar debes usar un método de firma e instalación compatible con
+tu dispositivo y con los requisitos de XITFORGE.
+La instalación directa desde una web necesita preparar una distribución
+firmada válida, un manifiesto y direcciones HTTPS accesibles.
+No se ha publicado ni modificado tu alojamiento actual.
+
+DATOS DE LOS ARCHIVOS
+Los rangos de iOS son los indicados por el nombre de cada archivo;
+no se han verificado ejecutándolos en dispositivos.
+Ambos paquetes son ediciones de la misma aplicación: elige una.
+Los rangos se solapan en iOS 26 a 26.0.1; confirma qué edición corresponde
+en ese tramo antes de instalar.
+
+XITFORGE_1.1.2_IOS_17-26.0.1(1).ipa
+Versión interna: 1.1.2
+Tamaño: 3319372 bytes
+SHA-256: a0915ea3877540ac7ca0bbb49c0b85b9f72a21f427d688c7c4b0b488f88b5875
+
+XITFORGE_1.1.2_IOS_26-27BETA4(1).ipa
+Versión interna: 1.2.0 (aunque el nombre del archivo indica 1.1.2)
+Tamaño: 3271046 bytes
+SHA-256: d530ea3b2f7a0ebe496ac414ef5c4a322d963df997c15dee290dc3ebddb8aadb
+
+Los dos IPA se incluyen sin modificar sus bytes.
+
+Referencia de Apple sobre distribución web:
+https://support.apple.com/guide/deployment/distribute-proprietary-in-house-apps-depce7cefc4d/web
