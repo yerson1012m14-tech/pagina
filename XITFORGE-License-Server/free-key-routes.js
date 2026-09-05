@@ -17,10 +17,14 @@ function licenseDurationSeconds(license) {
   return Number.isSafeInteger(seconds) && seconds > 0 ? seconds : 0;
 }
 
-// Official protocol: POST, token and hash in the query; only literal TRUE succeeds.
+// POST with token and hash in the query. Accept an explicit TRUE response,
+// either as documented text or inside the current API's JSON status field.
 // https://publisher.linkvertise.com/documentations/Anti_Bypass_Documentation.pdf
-async function verifyLinkvertise(hash, token, fetchImpl = globalThis.fetch) {
-  if (!HEX64.test(hash || '') || !HEX64.test(token || '')) return false;
+async function verifyLinkvertise(hash, token, fetchImpl = globalThis.fetch, report = () => {}) {
+  const reject = (reason, details = {}) => { report({ reason, ...details }); return false; };
+  if (!hash) return reject('hash_missing');
+  if (!HEX64.test(hash)) return reject('hash_invalid');
+  if (!HEX64.test(token || '')) return reject('token_invalid');
   const url = new URL(VERIFY_URL);
   url.searchParams.set('token', token);
   url.searchParams.set('hash', hash);
@@ -29,9 +33,21 @@ async function verifyLinkvertise(hash, token, fetchImpl = globalThis.fetch) {
     signal: AbortSignal.timeout(4500),
     headers: { Accept: 'application/json, text/plain' }
   });
-  if (!response.ok) return false;
-  const body = await response.text();
-  return /^true$/i.test(body.trim());
+  if (!response.ok) return reject('provider_http_error', { httpStatus: response.status });
+  let status = (await response.text()).trim();
+  try {
+    const data = JSON.parse(status);
+    if (data && typeof data === 'object' && !Array.isArray(data) &&
+        Object.hasOwn(data, 'status')) status = data.status;
+  } catch { /* The documented plain-text response remains supported. */ }
+  if (status === true || (typeof status === 'string' && /^true$/i.test(status.trim()))) return true;
+  if (status === false || (typeof status === 'string' && /^false$/i.test(status.trim()))) {
+    return reject('hash_rejected');
+  }
+  if (typeof status === 'string' && /^invalid token\.?$/i.test(status.trim())) {
+    return reject('token_rejected');
+  }
+  return reject('provider_response_unrecognized');
 }
 
 function makeCodec(secret) {
@@ -247,7 +263,12 @@ function registerFreeKeyRoutes({ app, pool, rateLimit, generateKey, normalizeKey
         const waitUntil = remainingUntil(v, n);
         if (waitUntil > Date.now()) return { waitUntil };
         // No license or cooldown is written until the provider confirms this proof.
-        if (!await verifyLinkvertise(proof, config.token, fetchImpl)) return { error: 'ads_not_verified' };
+        const verified = await verifyLinkvertise(proof, config.token, fetchImpl, diagnostic => {
+          // Only allowlisted reasons and the HTTP status are logged. Never log
+          // response bodies: the provider can include a private user_token.
+          console.warn('Free-key Linkvertise verification rejected:', JSON.stringify(diagnostic));
+        });
+        if (!verified) return { error: 'verification_failed' };
         const key = normalizeKey(generateKey());
         const license = (await client.query(`
           INSERT INTO licenses (key_hash, key_prefix, key_last4, status,
