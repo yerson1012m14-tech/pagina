@@ -2176,6 +2176,146 @@
       .xf-preview .menu-toggle,.xf-preview .side-menu,.xf-preview .menu-backdrop,.xf-preview a{transition:none!important}
     }
 
+  
+    /* ===== VIDEO ACTIVACION - AJUSTE FINAL ===== */
+    #video-activacion.xf-access-dialog{
+      width:min(1280px,calc(100vw - 12px)) !important;
+      max-width:none !important;
+      height:min(920px,calc(100dvh - 12px)) !important;
+      max-height:calc(100dvh - 12px) !important;
+      overflow:hidden !important;
+      margin:auto !important;
+    }
+
+    #video-activacion .xf-access-card{
+      width:100% !important;
+      height:100% !important;
+      max-width:none !important;
+      padding:18px !important;
+      gap:10px !important;
+      overflow:hidden !important;
+    }
+
+    #video-activacion .xf-access-top,
+    #video-activacion h2,
+    #video-activacion p{
+      flex:0 0 auto !important;
+    }
+
+    #video-activacion .xf-activation-video-frame{
+      position:relative !important;
+      flex:1 1 auto !important;
+      width:100% !important;
+      height:auto !important;
+      min-height:0 !important;
+      max-height:none !important;
+      aspect-ratio:auto !important;
+      margin:0 !important;
+      overflow:hidden !important;
+      background:#000 !important;
+      border-radius:20px !important;
+    }
+
+    #video-activacion .xf-activation-video-frame video{
+      position:absolute !important;
+      inset:0 !important;
+      width:100% !important;
+      height:100% !important;
+      object-fit:contain !important;
+      background:#000 !important;
+      border-radius:18px !important;
+    }
+
+    /* Los botones quedan ENCIMA del video, por eso siempre se ven. */
+    #video-activacion .xf-video-controls{
+      position:absolute !important;
+      z-index:20 !important;
+      top:12px !important;
+      right:12px !important;
+      width:auto !important;
+      margin:0 !important;
+      display:flex !important;
+      visibility:visible !important;
+      opacity:1 !important;
+      align-items:center !important;
+      justify-content:flex-end !important;
+      gap:8px !important;
+      pointer-events:auto !important;
+    }
+
+    #video-activacion .xf-video-control{
+      display:inline-flex !important;
+      visibility:visible !important;
+      opacity:1 !important;
+      width:auto !important;
+      min-height:42px !important;
+      padding:0 13px !important;
+      border:1px solid rgba(255,150,160,.48) !important;
+      border-radius:12px !important;
+      background:rgba(20,4,6,.88) !important;
+      color:#fff !important;
+      box-shadow:0 6px 22px rgba(0,0,0,.42) !important;
+      backdrop-filter:blur(8px) !important;
+      -webkit-backdrop-filter:blur(8px) !important;
+    }
+
+    @media (max-width:760px){
+      #video-activacion.xf-access-dialog{
+        width:calc(100vw - 6px) !important;
+        height:calc(100dvh - 6px) !important;
+        max-height:calc(100dvh - 6px) !important;
+        border-radius:18px !important;
+      }
+
+      #video-activacion .xf-access-card{
+        padding:12px !important;
+        gap:8px !important;
+      }
+
+      #video-activacion .xf-access-top{
+        min-height:42px !important;
+      }
+
+      #video-activacion h2{
+        margin:0 !important;
+        font-size:1.28rem !important;
+      }
+
+      #video-activacion p{
+        font-size:.88rem !important;
+        line-height:1.35 !important;
+      }
+
+      #video-activacion .xf-video-controls{
+        top:8px !important;
+        right:8px !important;
+      }
+
+      #video-activacion .xf-video-control{
+        min-height:40px !important;
+        padding:0 10px !important;
+        font-size:.78rem !important;
+      }
+    }
+
+    /* En pantallas bajitas quitamos el texto secundario para darle
+       todavía más alto al video. */
+    @media (max-height:650px){
+      #video-activacion #activationVideoDescription{
+        display:none !important;
+      }
+
+      #video-activacion .xf-access-card{
+        padding:10px !important;
+        gap:6px !important;
+      }
+
+      #video-activacion h2{
+        font-size:1.15rem !important;
+        margin:0 !important;
+      }
+    }
+
   </style>
 </head>
 <body class="xf-preview">
@@ -2388,16 +2528,16 @@
           <source src="/video/INSTALACION.mp4" type="video/mp4">
           Tu navegador no puede reproducir este video.
         </video>
-      </div>
-      <div class="xf-video-controls" aria-label="Controles del video">
-        <button class="xf-video-control" id="activationPlayBtn" type="button" aria-label="Reproducir o pausar video">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7L8 5Z"/></svg>
-          <span id="activationPlayLabel">Reproducir</span>
-        </button>
-        <button class="xf-video-control" id="activationFullscreenBtn" type="button" aria-label="Abrir video en pantalla completa">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/></svg>
-          <span>Pantalla completa</span>
-        </button>
+        <div class="xf-video-controls" aria-label="Controles del video">
+          <button class="xf-video-control" id="activationPlayBtn" type="button" aria-label="Reproducir o pausar video">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7L8 5Z"/></svg>
+            <span id="activationPlayLabel">Reproducir</span>
+          </button>
+          <button class="xf-video-control" id="activationFullscreenBtn" type="button" aria-label="Abrir video en pantalla completa">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/></svg>
+            <span>Pantalla completa</span>
+          </button>
+        </div>
       </div>
     </div>
   </dialog>
