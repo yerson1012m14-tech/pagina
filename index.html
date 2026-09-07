@@ -2272,16 +2272,20 @@
     </div>
   </dialog>
 
-  <!-- Agregar el video de activación de XITFORGE cuando se proporcione. -->
   <dialog class="xf-access-dialog" id="video-activacion" aria-labelledby="activationVideoTitle" aria-describedby="activationVideoDescription">
     <div class="xf-access-card">
       <div class="xf-access-top">
         <span class="xf-access-icon"><svg class="xf-menu-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m10 9 5 3-5 3V9Z"/></svg></span>
-        <div class="xf-dialog-actions"><span class="xf-access-status">Pendiente</span><form method="dialog"><button class="xf-dialog-close" type="submit" aria-label="Cerrar ventana de video de activación" autofocus><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></form></div>
+        <div class="xf-dialog-actions"><span class="xf-access-status">Disponible</span><form method="dialog"><button class="xf-dialog-close" type="submit" aria-label="Cerrar ventana de video de activación" autofocus><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></form></div>
       </div>
       <h2 id="activationVideoTitle">Video de activación</h2>
-      <p id="activationVideoDescription">El video de activación de XITFORGE todavía no está disponible en esta página.</p>
-      <a class="xf-text-link" href="#contacto">Consultar la activación <span aria-hidden="true">→</span></a>
+      <p id="activationVideoDescription">Mira este video para ver cómo activar XITFORGE.</p>
+      <div class="install-video-frame" style="margin-top:0;min-height:auto;">
+        <video id="activationVideo" controls preload="metadata" playsinline>
+          <source src="/video/INSTALACION.mp4" type="video/mp4">
+          Tu navegador no puede reproducir este video.
+        </video>
+      </div>
     </div>
   </dialog>
 
@@ -2293,6 +2297,11 @@
   const menuBackdrop = document.getElementById("menuBackdrop");
   const pageContent = document.getElementById("pageContent");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const activationVideoDialog = document.getElementById("video-activacion");
+  const activationVideo = document.getElementById("activationVideo");
+  activationVideoDialog?.addEventListener("close", () => {
+    activationVideo?.pause();
+  });
   const freeApi = "https://xitforge-license-server.onrender.com";
   const freeDialog = document.getElementById("key-gratis");
   const freeStart = document.getElementById("freeKeyStart");
