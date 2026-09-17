@@ -2334,7 +2334,6 @@
     <div class="side-menu-title">Explorar</div>
     <button type="button" data-scroll-to="opciones"><svg class="xf-menu-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5"/></svg><span>Opciones de XITFORGE</span></button>
     <button type="button" data-scroll-to="contacto"><svg class="xf-menu-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H4l-2 2V11.5A8.5 8.5 0 0 1 10.5 3h2A8.5 8.5 0 0 1 21 11.5Z"/><path d="M7 9h9M7 13h6"/></svg><span>Compra y contacto</span></button>
-    <button type="button" data-dialog-target="key-gratis" aria-haspopup="dialog" aria-controls="key-gratis"><svg class="xf-menu-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v9h14v-9M12 8v13M12 8H8a3 3 0 1 1 3-3l1 3Zm0 0h4a3 3 0 1 0-3-3l-1 3Z"/></svg><span>Key gratis</span></button>
     <button type="button" data-dialog-target="video-activacion" aria-haspopup="dialog" aria-controls="video-activacion"><svg class="xf-menu-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m10 9 5 3-5 3V9Z"/></svg><span>Video de activación</span></button>
     <button type="button" data-scroll-to="descargas"><svg class="xf-menu-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 16v4h14v-4"/></svg><span>Descargar XITFORGE</span></button>
 
@@ -2490,30 +2489,6 @@
     <footer class="xf-footer"><span>JASON<span class="xf-footer-accent">XIT</span></span><span>XITFORGE · iOS</span></footer>
   </main>
 
-  <!-- El servidor de XITFORGE verifica Linkvertise y aplica el límite de reclamos. -->
-  <dialog class="xf-access-dialog xf-key-dialog" id="key-gratis" aria-labelledby="freeKeyTitle">
-    <div class="xf-key-header">
-      <h2 id="freeKeyTitle">Obtén una nueva llave</h2>
-      <form method="dialog"><button class="xf-dialog-close" type="submit" aria-label="Cerrar ventana de key gratis" autofocus><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></form>
-    </div>
-    <div class="xf-key-body">
-      <div class="xf-key-provider">
-        <span class="xf-key-provider-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m10 13 4-4m-6 6-1 1a3.5 3.5 0 0 1-5-5l4-4a3.5 3.5 0 0 1 5 0m2 10a3.5 3.5 0 0 0 5 0l4-4a3.5 3.5 0 0 0-5-5l-1 1" transform="translate(1 0)"/></svg></span>
-        <div class="xf-key-provider-copy">
-          <h3>Anuncio de enlace</h3>
-          <span class="xf-key-recommended">Recomendado</span>
-        </div>
-        <button class="xf-key-action" id="freeKeyStart" type="button" aria-label="Continuar a Linkvertise" aria-describedby="freeKeyMessage freeKeyCountdown"><span id="freeKeyStartLabel">Continuar</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></button>
-      </div>
-      <p class="xf-key-feedback" id="freeKeyMessage" role="status" aria-live="polite"></p>
-      <div class="xf-key-result" id="freeKeyResult" hidden>
-        <label for="freeKeyValue">Tu key</label>
-        <button class="xf-key-copy" id="freeKeyCopy" type="button">Copiar</button>
-        <input id="freeKeyValue" type="text" readonly autocomplete="off" spellcheck="false" aria-label="Key de XITFORGE para copiar">
-      </div>
-      <p class="xf-key-countdown" id="freeKeyCountdown" hidden></p>
-    </div>
-  </dialog>
 
   <dialog class="xf-access-dialog" id="video-activacion" aria-labelledby="activationVideoTitle" aria-describedby="activationVideoDescription">
     <div class="xf-access-card">
@@ -2595,120 +2570,6 @@
     activationVideo?.pause();
     syncActivationPlayLabel();
   });
-  const freeApi = "https://xitforge-license-server.onrender.com";
-  const freeDialog = document.getElementById("key-gratis");
-  const freeStart = document.getElementById("freeKeyStart");
-  const freeStartLabel = document.getElementById("freeKeyStartLabel");
-  const freeMessage = document.getElementById("freeKeyMessage");
-  const freeResult = document.getElementById("freeKeyResult");
-  const freeValue = document.getElementById("freeKeyValue");
-  const freeCountdown = document.getElementById("freeKeyCountdown");
-  const receiptStorage = "xitforge.freeKey.receipt.v1";
-  let freeReceipt = "", freeStartUrl = "", freeLoading = false;
-  let nextClaimAt = 0, serverOffset = 0, freeNotice = "";
-  try { freeReceipt = sessionStorage.getItem(receiptStorage) || ""; } catch {}
-  function rememberReceipt(value) {
-    freeReceipt = value;
-    try {
-      if (value) sessionStorage.setItem(receiptStorage, value);
-      else sessionStorage.removeItem(receiptStorage);
-    } catch {}
-  }
-  async function freeRequest(path, receipt = "") {
-    const response = await fetch(freeApi + path, {
-      cache: "no-store", credentials: "omit", referrerPolicy: "no-referrer",
-      signal: AbortSignal.timeout(35000),
-      headers: receipt ? { Authorization: "Bearer " + receipt } : {}
-    });
-    if (response.status === 404 && path === "/api/free-key/config") {
-      const error = new Error("free_key_not_ready");
-      error.code = "not_ready";
-      throw error;
-    }
-    const data = await response.json();
-    if (!response.ok || !data.ok) {
-      const error = new Error("free_key_request");
-      error.code = data.error || "server_error";
-      throw error;
-    }
-    return data;
-  }
-  function updateFreeCountdown() {
-    const remaining = Math.max(0, nextClaimAt - Date.now() - serverOffset);
-    freeStart.disabled = freeLoading || remaining > 0;
-    freeStart.setAttribute("aria-busy", String(freeLoading));
-    freeStartLabel.textContent = freeLoading ? "Espera…" : "Continuar";
-    freeCountdown.hidden = remaining <= 0;
-    if (remaining > 0) {
-      const seconds = Math.ceil(remaining / 1000);
-      const hours = String(Math.floor(seconds / 3600)).padStart(2, "0");
-      const minutes = String(Math.floor(seconds / 60) % 60).padStart(2, "0");
-      const last = String(seconds % 60).padStart(2, "0");
-      freeCountdown.textContent = "Disponible en " + hours + ":" + minutes + ":" + last;
-    } else {
-      freeCountdown.textContent = "";
-    }
-  }
-  async function refreshFreeKey(continueToAds = false) {
-    if (freeLoading) return;
-    freeLoading = true;
-    let canContinue = false;
-    updateFreeCountdown();
-    try {
-      const config = await freeRequest("/api/free-key/config");
-      freeStartUrl = config.enabled && config.startUrl === freeApi + "/free-key/start"
-        ? config.startUrl : "";
-      if (freeReceipt) {
-        try {
-          const result = await freeRequest("/api/free-key/receipt", freeReceipt);
-          const serverTime = Date.parse(result.serverNow);
-          const nextTime = Date.parse(result.nextClaimAt);
-          if (!Number.isFinite(serverTime) || !Number.isFinite(nextTime)) throw new Error("invalid_receipt");
-          serverOffset = serverTime - Date.now();
-          nextClaimAt = nextTime;
-          const hasKey = /^[A-Z0-9]{4}(?:-[A-Z0-9]{4}){3}$/.test(result.key || "");
-          freeResult.hidden = !hasKey;
-          freeValue.value = hasKey ? result.key : "";
-          freeMessage.textContent = hasKey ? "" : "Esta key ya no está disponible.";
-        } catch (error) {
-          if (error.code !== "receipt_expired") throw error;
-          rememberReceipt("");
-          freeResult.hidden = true;
-          freeValue.value = "";
-        }
-      }
-      if (freeNotice) freeMessage.textContent = freeNotice;
-      else if (continueToAds && !freeStartUrl) freeMessage.textContent = "Las keys aún no están disponibles.";
-      canContinue = continueToAds && Boolean(freeStartUrl) && nextClaimAt <= Date.now() + serverOffset;
-    } catch (error) {
-      freeStartUrl = "";
-      freeMessage.textContent = freeNotice || (error.code === "not_ready"
-        ? "Las keys aún no están disponibles."
-        : "No se pudo conectar. Inténtalo de nuevo.");
-    } finally {
-      freeLoading = false;
-      updateFreeCountdown();
-    }
-    if (canContinue && freeDialog.open) window.location.assign(freeStartUrl);
-  }
-  freeStart.addEventListener("click", () => {
-    if (freeLoading || nextClaimAt > Date.now() + serverOffset) return;
-    freeNotice = "";
-    freeMessage.textContent = "";
-    refreshFreeKey(true);
-  });
-  document.getElementById("freeKeyCopy").addEventListener("click", async () => {
-    if (!freeValue.value) return;
-    try {
-      await navigator.clipboard.writeText(freeValue.value);
-      freeMessage.textContent = "Key copiada.";
-    } catch {
-      freeValue.focus();
-      freeValue.select();
-      freeMessage.textContent = "Mantén pulsada la key para copiarla.";
-    }
-  });
-  setInterval(() => { if (freeDialog.open) updateFreeCountdown(); }, 1000);
   function setMenu(open, restoreFocus = true) {
     document.body.classList.toggle("menu-open", open);
     menuToggle.setAttribute("aria-expanded", String(open));
@@ -2737,12 +2598,6 @@
       setMenu(false);
       dialog.showModal();
       document.body.classList.add("xf-dialog-open");
-      if (dialog === freeDialog) {
-        freeNotice = "";
-        freeMessage.textContent = "";
-        updateFreeCountdown();
-        if (freeReceipt) refreshFreeKey();
-      }
     });
   });
   document.querySelectorAll(".xf-access-dialog").forEach(dialog => {
@@ -2781,32 +2636,6 @@
       }
     }
   });
-  if (window.location.hash === "#key-gratis" || window.location.hash.startsWith("#key-gratis?")) {
-    const params = new URLSearchParams(window.location.hash.split("?")[1] || "");
-    const receipt = params.get("receipt");
-    if (receipt && /^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(receipt) && receipt.length <= 512) rememberReceipt(receipt);
-    const errors = {
-      not_ready: "Las keys aún no están disponibles.",
-      session_missing: "Pulsa Continuar y usa el mismo navegador.",
-      session_expired: "La sesión venció. Pulsa Continuar otra vez.",
-      ads_not_verified: "Completa los anuncios para recibir tu key.",
-      verification_failed: "No se pudo verificar. Inténtalo de nuevo.",
-      server_error: "No se pudo recibir la key. Inténtalo de nuevo."
-    };
-    freeNotice = errors[params.get("error")] || "";
-    const waitUntil = Number(params.get("waitUntil"));
-    if (Number.isFinite(waitUntil) && waitUntil > Date.now()) {
-      nextClaimAt = waitUntil;
-    }
-    // A receipt is a private capability; remove it from the visible URL immediately.
-    history.replaceState(null, "", window.location.pathname + window.location.search + "#key-gratis");
-    setMenu(false);
-    freeDialog.showModal();
-    document.body.classList.add("xf-dialog-open");
-    freeMessage.textContent = freeNotice;
-    updateFreeCountdown();
-    if (freeReceipt) refreshFreeKey();
-  }
 })();
 </script>
 
