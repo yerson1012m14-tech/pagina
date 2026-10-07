@@ -1970,6 +1970,14 @@
     .xf-social-row a:hover{color:white;text-decoration:underline;text-underline-offset:5px}
     .xf-downloads-section .xitforge-downloads{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:0;gap:22px}
     .xf-download-card{padding:28px;border-radius:24px}
+    .xf-universal-card{margin-bottom:24px;border-color:rgba(255,130,145,.5);background:linear-gradient(120deg,rgba(110,17,37,.28),rgba(14,4,8,.94))}
+    .xf-universal-card h3{font-size:clamp(1.4rem,4vw,2.1rem);overflow-wrap:anywhere}
+    .xf-universal-card .lead{max-width:760px}
+    .xf-universal-card .ipa-download{background:#b5213d;width:fit-content;max-width:100%;box-sizing:border-box;white-space:normal;text-align:center}
+    .xf-universal-card .ipa-download:hover{background:#d12a48}
+    .xf-universal-card .ipa-install-note{margin-bottom:0}
+    @media(max-width:520px){.xf-universal-card .ipa-download{width:100%;font-size:.875rem}}
+
     .xf-download-card .ipa-meta{margin-bottom:22px}
     .xf-download-card .ipa-format{font-size:.875rem;border-radius:9px;border-color:rgba(255,127,145,.3);background:rgba(255,88,115,.08);color:#ffaeba}
     .xf-download-card h3{margin:0 0 12px;font-size:clamp(1.4rem,2.5vw,1.9rem);letter-spacing:-.025em;line-height:1.3}
@@ -2452,10 +2460,21 @@
     </section>
     <section class="xf-section xf-downloads-section" id="descargas" aria-labelledby="downloadsTitle" tabindex="-1">
       <div class="xf-section-heading">
-        <div><p class="xf-eyebrow">LLEVA XITFORGE CONTIGO</p><h2 id="downloadsTitle">Elige tu edición.</h2></div>
-        <p>Comprueba tu versión de iOS<br>y descarga el archivo correspondiente.</p>
+        <div><p class="xf-eyebrow">LLEVA XITFORGE CONTIGO</p><h2 id="downloadsTitle">Descarga XITFORGE.</h2></div>
+        <p>La nueva edición Universal<br>y las ediciones anteriores.</p>
       </div>
-      <p class="xf-compatibility-note" id="iosCompatibility">Compatible con todas las versiones de iOS dentro de los rangos indicados, <strong>excepto iOS 18.7 y todas las actualizaciones 18.7.x.</strong></p>
+      <article class="card ipa-card xf-download-card xf-universal-card" aria-labelledby="ipa-universal-title">
+        <div class="ipa-meta"><span class="ipa-format">UNIVERSAL</span><span>10.0.15</span></div>
+        <h3 id="ipa-universal-title">XITFORGE-UNIVERSAL</h3>
+        <p class="ipa-version">Una sola IPA · iOS 17 o superior</p>
+        <p class="lead">La nueva edición con túnel integrado. Instalación desde iOS 17; las funciones disponibles dependen de tu versión de iOS y del emparejamiento.</p>
+        <a class="btn btn-primary ipa-download" href="https://jasonxitoficial.com/ipas/XITFORGE-UNIVERSAL.ipa" download="XITFORGE-UNIVERSAL.ipa" aria-label="Descargar XITFORGE-UNIVERSAL para iOS 17 o superior" aria-describedby="universalRequirements">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 16v4h14v-4"/></svg>
+          DESCARGAR XITFORGE-UNIVERSAL
+        </a>
+        <p class="ipa-install-note" id="universalRequirements">Emparejamiento desde la app: iOS 27. En otras versiones, importa un registro válido. La IPA requiere firma antes de instalarse.</p>
+      </article>
+      <p class="xf-compatibility-note" id="iosCompatibility">Ediciones anteriores: conserva los rangos indicados para cada IPA. La edición iOS 17–26.0.1 excluye iOS 18.7 y 18.7.x.</p>
       <div class="grid xitforge-downloads">
         <article class="card ipa-card xf-download-card" aria-labelledby="ipa-ios17-title">
           <div class="ipa-meta"><span class="ipa-format">IPA</span><span>10.0.15</span></div>
@@ -2480,7 +2499,7 @@
         </article>
       </div>
 
-      <p class="ipa-install-note">Descarga la edición que corresponda a tu versión de iOS. Solo necesitas una de las dos IPA.</p>
+      <p class="ipa-install-note">Solo necesitas instalar una IPA. Universal requiere iOS 17 o superior; las ediciones anteriores conservan sus requisitos.</p>
       <details class="ipa-install-help">
         <summary>Cómo instalar el IPA</summary>
         <p>Puedes instalar la IPA con <a href="https://gbox.run/" target="_blank" rel="noopener">GBox</a>, <a href="https://esign.yyyue.xyz/" target="_blank" rel="noopener">ESign</a>, <a href="https://github.com/claration/Feather" target="_blank" rel="noopener">Feather</a>, <a href="https://sideloadly.io/" target="_blank" rel="noopener">Sideloadly</a>, <a href="https://github.com/altstoreio/AltStore" target="_blank" rel="noopener">AltStore Classic</a> o <a href="https://sidestore.io/" target="_blank" rel="noopener">SideStore</a>, según tu versión de iOS y los requisitos de firma de cada herramienta.</p>

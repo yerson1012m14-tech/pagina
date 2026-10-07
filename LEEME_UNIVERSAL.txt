@@ -1,0 +1,33 @@
+PAGINA — NUEVA DESCARGA XITFORGE-UNIVERSAL
+
+Copia los tres archivos del ZIP en el repositorio pagina respetando sus rutas.
+Reemplaza index.html y pagina/index.html. Agrega ipas/XITFORGE-UNIVERSAL.ipa.
+Conserva las dos IPA anteriores y los demas archivos. No borres ninguno.
+Publica esos mismos archivos en el alojamiento de jasonxitoficial.com si el
+alojamiento no se actualiza automaticamente al guardar el repositorio.
+
+Universal aparece como descarga principal y las otras dos ediciones se conservan.
+La segunda copia del HTML ahora enlaza las IPA anteriores que realmente existen.
+El boton Universal usa https://jasonxitoficial.com/ipas/XITFORGE-UNIVERSAL.ipa.
+
+COMPATIBILIDAD
+La IPA declara MinimumOSVersion 17.0: requiere iOS 17 o superior para instalarse.
+Emparejar desde la app requiere iOS 27; en otras versiones importa un registro.
+Las funciones disponibles dependen de iOS y los servicios del iPhone.
+No se anuncia compatibilidad con iOS anteriores a 17 ni todas las funciones en
+cualquier version. Requiere firma antes de instalarse.
+
+IPA
+Incluye el diseno del tunel aprobado, notificaciones del PIN, avisos claros,
+desactivacion con originales/reglas del panel y el nombre UNIVERSAL.
+Conserva LicenseValidator y la autorizacion de keys al activar.
+Version interna 10.0.15, build 180. Compilada y enlazada ARM64 para iPhone.
+El modulo del tunel es la compilacion local actualizada.
+Los recursos visuales y el motor Filza se conservaron de la IPA anterior.
+No se ha probado esta IPA en un iPhone ni todas las versiones de iOS.
+
+VERIFICACION DE PAGINA
+Vista de escritorio y movil; sin errores de scripts ni desbordamiento.
+Tres descargas presentes. Boton Universal probado con los bytes reales de la IPA
+en una prueba local; no se comprobo la descarga desde el alojamiento remoto.
+No se modifican el servidor de keys, los anuncios ni la generacion de keys.
