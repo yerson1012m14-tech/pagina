@@ -2013,109 +2013,6 @@
     .xf-access-card h2{margin:4px 0 0;font-size:1.6rem;font-weight:650;line-height:1.25;letter-spacing:-.025em;text-align:left;text-transform:none}
     .xf-access-card p{margin:0;color:var(--xf-copy);font-size:1rem;line-height:1.7}
     .xf-access-card .xf-text-link{margin-top:auto}
-
-    /* VIDEO DE ACTIVACIÓN: MODAL GRANDE + CONTROLES VISIBLES */
-    #video-activacion{
-      width:min(1120px,calc(100vw - 28px));
-      max-width:none;
-      max-height:calc(100dvh - 20px);
-      overflow:auto;
-    }
-    #video-activacion .xf-access-card{
-      width:100%;
-      padding:24px;
-      gap:14px;
-    }
-    #video-activacion .xf-activation-video-frame{
-      position:relative;
-      width:100%;
-      height:clamp(420px,64dvh,760px);
-      margin-top:4px;
-      border:1px solid rgba(255,80,80,.42);
-      border-radius:22px;
-      background:#000;
-      overflow:hidden;
-      box-shadow:inset 0 0 0 1px rgba(255,255,255,.035),0 18px 48px rgba(0,0,0,.42);
-    }
-    #video-activacion .xf-activation-video-frame video{
-      display:block;
-      width:100%;
-      height:100%;
-      object-fit:contain;
-      background:#000;
-      border-radius:20px;
-    }
-    #video-activacion .xf-video-controls{
-      width:100%;
-      display:flex;
-      align-items:center;
-      justify-content:flex-end;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:2px;
-    }
-    #video-activacion .xf-video-control{
-      min-height:46px;
-      padding:0 16px;
-      border:1px solid rgba(255,120,135,.30);
-      border-radius:13px;
-      background:rgba(255,255,255,.055);
-      color:#ffe8ec;
-      font:inherit;
-      font-size:.9rem;
-      font-weight:700;
-      cursor:pointer;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-    }
-    #video-activacion .xf-video-control:hover{
-      background:rgba(255,75,95,.16);
-      border-color:rgba(255,140,150,.52);
-    }
-    #video-activacion .xf-video-control:active{transform:translateY(1px)}
-    #video-activacion .xf-video-control svg{
-      width:19px;
-      height:19px;
-      fill:none;
-      stroke:currentColor;
-      stroke-width:1.8;
-      stroke-linecap:round;
-      stroke-linejoin:round;
-    }
-
-    @media (max-width:760px){
-      #video-activacion{
-        width:calc(100vw - 12px);
-        max-height:calc(100dvh - 12px);
-        border-radius:20px;
-      }
-      #video-activacion .xf-access-card{
-        padding:16px;
-        gap:12px;
-      }
-      #video-activacion .xf-activation-video-frame{
-        height:58dvh;
-        min-height:380px;
-        max-height:650px;
-        border-radius:18px;
-      }
-      #video-activacion .xf-activation-video-frame video{
-        border-radius:16px;
-      }
-      #video-activacion .xf-video-controls{
-        display:grid;
-        grid-template-columns:1fr 1fr;
-        gap:8px;
-      }
-      #video-activacion .xf-video-control{
-        width:100%;
-        min-height:48px;
-        padding:0 10px;
-        font-size:.86rem;
-      }
-    }
     .xf-key-dialog{width:min(520px,calc(100% - 24px));border-color:#28262e;border-radius:18px;background:#101012;color:#f5f3f7;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
     .xf-key-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:5px 10px 5px 20px;border-bottom:1px solid #25232b}
     .xf-key-header h2{margin:0;font-size:1rem;font-weight:600;line-height:1.4;letter-spacing:0;text-align:left;text-transform:none}
@@ -2184,146 +2081,6 @@
       .xf-preview .menu-toggle,.xf-preview .side-menu,.xf-preview .menu-backdrop,.xf-preview a{transition:none!important}
     }
 
-  
-    /* ===== VIDEO ACTIVACION - AJUSTE FINAL ===== */
-    #video-activacion.xf-access-dialog{
-      width:min(1280px,calc(100vw - 12px)) !important;
-      max-width:none !important;
-      height:min(920px,calc(100dvh - 12px)) !important;
-      max-height:calc(100dvh - 12px) !important;
-      overflow:hidden !important;
-      margin:auto !important;
-    }
-
-    #video-activacion .xf-access-card{
-      width:100% !important;
-      height:100% !important;
-      max-width:none !important;
-      padding:18px !important;
-      gap:10px !important;
-      overflow:hidden !important;
-    }
-
-    #video-activacion .xf-access-top,
-    #video-activacion h2,
-    #video-activacion p{
-      flex:0 0 auto !important;
-    }
-
-    #video-activacion .xf-activation-video-frame{
-      position:relative !important;
-      flex:1 1 auto !important;
-      width:100% !important;
-      height:auto !important;
-      min-height:0 !important;
-      max-height:none !important;
-      aspect-ratio:auto !important;
-      margin:0 !important;
-      overflow:hidden !important;
-      background:#000 !important;
-      border-radius:20px !important;
-    }
-
-    #video-activacion .xf-activation-video-frame video{
-      position:absolute !important;
-      inset:0 !important;
-      width:100% !important;
-      height:100% !important;
-      object-fit:contain !important;
-      background:#000 !important;
-      border-radius:18px !important;
-    }
-
-    /* Los botones quedan ENCIMA del video, por eso siempre se ven. */
-    #video-activacion .xf-video-controls{
-      position:absolute !important;
-      z-index:20 !important;
-      top:12px !important;
-      right:12px !important;
-      width:auto !important;
-      margin:0 !important;
-      display:flex !important;
-      visibility:visible !important;
-      opacity:1 !important;
-      align-items:center !important;
-      justify-content:flex-end !important;
-      gap:8px !important;
-      pointer-events:auto !important;
-    }
-
-    #video-activacion .xf-video-control{
-      display:inline-flex !important;
-      visibility:visible !important;
-      opacity:1 !important;
-      width:auto !important;
-      min-height:42px !important;
-      padding:0 13px !important;
-      border:1px solid rgba(255,150,160,.48) !important;
-      border-radius:12px !important;
-      background:rgba(20,4,6,.88) !important;
-      color:#fff !important;
-      box-shadow:0 6px 22px rgba(0,0,0,.42) !important;
-      backdrop-filter:blur(8px) !important;
-      -webkit-backdrop-filter:blur(8px) !important;
-    }
-
-    @media (max-width:760px){
-      #video-activacion.xf-access-dialog{
-        width:calc(100vw - 6px) !important;
-        height:calc(100dvh - 6px) !important;
-        max-height:calc(100dvh - 6px) !important;
-        border-radius:18px !important;
-      }
-
-      #video-activacion .xf-access-card{
-        padding:12px !important;
-        gap:8px !important;
-      }
-
-      #video-activacion .xf-access-top{
-        min-height:42px !important;
-      }
-
-      #video-activacion h2{
-        margin:0 !important;
-        font-size:1.28rem !important;
-      }
-
-      #video-activacion p{
-        font-size:.88rem !important;
-        line-height:1.35 !important;
-      }
-
-      #video-activacion .xf-video-controls{
-        top:8px !important;
-        right:8px !important;
-      }
-
-      #video-activacion .xf-video-control{
-        min-height:40px !important;
-        padding:0 10px !important;
-        font-size:.78rem !important;
-      }
-    }
-
-    /* En pantallas bajitas quitamos el texto secundario para darle
-       todavía más alto al video. */
-    @media (max-height:650px){
-      #video-activacion #activationVideoDescription{
-        display:none !important;
-      }
-
-      #video-activacion .xf-access-card{
-        padding:10px !important;
-        gap:6px !important;
-      }
-
-      #video-activacion h2{
-        font-size:1.15rem !important;
-        margin:0 !important;
-      }
-    }
-
   </style>
 </head>
 <body class="xf-preview">
@@ -2342,6 +2099,7 @@
     <div class="side-menu-title">Explorar</div>
     <button type="button" data-scroll-to="opciones"><svg class="xf-menu-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5Zm-9 9 9 5 9-5M3 16l9 5 9-5"/></svg><span>Opciones de XITFORGE</span></button>
     <button type="button" data-scroll-to="contacto"><svg class="xf-menu-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5H4l-2 2V11.5A8.5 8.5 0 0 1 10.5 3h2A8.5 8.5 0 0 1 21 11.5Z"/><path d="M7 9h9M7 13h6"/></svg><span>Compra y contacto</span></button>
+    <button type="button" data-dialog-target="key-gratis" aria-haspopup="dialog" aria-controls="key-gratis"><svg class="xf-menu-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M5 12v9h14v-9M12 8v13M12 8H8a3 3 0 1 1 3-3l1 3Zm0 0h4a3 3 0 1 0-3-3l-1 3Z"/></svg><span>Key gratis</span></button>
     <button type="button" data-dialog-target="video-activacion" aria-haspopup="dialog" aria-controls="video-activacion"><svg class="xf-menu-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m10 9 5 3-5 3V9Z"/></svg><span>Video de activación</span></button>
     <button type="button" data-scroll-to="descargas"><svg class="xf-menu-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 16v4h14v-4"/></svg><span>Descargar XITFORGE</span></button>
 
@@ -2461,42 +2219,17 @@
     <section class="xf-section xf-downloads-section" id="descargas" aria-labelledby="downloadsTitle" tabindex="-1">
       <div class="xf-section-heading">
         <div><p class="xf-eyebrow">LLEVA XITFORGE CONTIGO</p><h2 id="downloadsTitle">Descarga XITFORGE.</h2></div>
-        <p>La nueva edición Universal<br>y las ediciones anteriores.</p>
+        <p>Una sola edición Universal<br>para iOS.</p>
       </div>
       <article class="card ipa-card xf-download-card xf-universal-card" aria-labelledby="ipa-universal-title">
-        <div class="ipa-meta"><span class="ipa-format">UNIVERSAL</span><span>10.0.15</span></div>
+        <div class="ipa-meta"><span class="ipa-format">UNIVERSAL</span><span>10.0.16</span></div>
         <h3 id="ipa-universal-title">XITFORGE-UNIVERSAL</h3>
         <a class="btn btn-primary ipa-download" href="https://jasonxitoficial.com/ipas/XITFORGE-UNIVERSAL.ipa" download="XITFORGE-UNIVERSAL.ipa" aria-label="Descargar XITFORGE-UNIVERSAL">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 16v4h14v-4"/></svg>
           DESCARGAR XITFORGE-UNIVERSAL
         </a>
       </article>
-      <p class="xf-compatibility-note" id="iosCompatibility">Ediciones anteriores: conserva los rangos indicados para cada IPA. La edición iOS 17–26.0.1 excluye iOS 18.7 y 18.7.x.</p>
-      <div class="grid xitforge-downloads">
-        <article class="card ipa-card xf-download-card" aria-labelledby="ipa-ios17-title">
-          <div class="ipa-meta"><span class="ipa-format">IPA</span><span>10.0.15</span></div>
-          <h3 id="ipa-ios17-title">iOS 17 – 26.0.1</h3>
-          <p class="ipa-version">XITFORGE · Versión 10.0.15</p>
-          <p class="lead">Compatible con iOS 17 hasta iOS 26.0.1, excepto iOS 18.7 y 18.7.x.</p>
-          <a class="btn btn-primary ipa-download" href="https://jasonxitoficial.com/ipas/XITFORGE_10.0.15_IOS_17-26.0.1.ipa" download="XITFORGE_10.0.15_IOS_17-26.0.1.ipa" aria-label="Descargar XITFORGE, edición iOS 17 a 26.0.1" aria-describedby="iosCompatibility">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 16v4h14v-4"/></svg>
-            DESCARGAR IPA
-          </a>
-        </article>
-
-        <article class="card ipa-card xf-download-card" aria-labelledby="ipa-ios26-title">
-          <div class="ipa-meta"><span class="ipa-format">IPA</span><span>10.0.15</span></div>
-          <h3 id="ipa-ios26-title">iOS 26 – 27 Beta 4</h3>
-          <p class="ipa-version">XITFORGE · Versión 10.0.15</p>
-          <p class="lead">Compatible con iOS 26 hasta iOS 27 Beta 4.</p>
-          <a class="btn btn-primary ipa-download" href="https://jasonxitoficial.com/ipas/XITFORGE_10.0.15_IOS_26-27BETA4.ipa" download="XITFORGE_10.0.15_IOS_26-27BETA4.ipa" aria-label="Descargar XITFORGE, edición iOS 26 a 27 Beta 4">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M5 16v4h14v-4"/></svg>
-            DESCARGAR IPA
-          </a>
-        </article>
-      </div>
-
-      <p class="ipa-install-note">Solo necesitas instalar una IPA. Las ediciones anteriores conservan sus requisitos.</p>
+      <p class="ipa-install-note">Descarga e instala XITFORGE Universal.</p>
       <details class="ipa-install-help">
         <summary>Cómo instalar el IPA</summary>
         <p>Universal: el archivo declara iOS 17 como versión mínima de instalación y requiere firma. Emparejar desde la app requiere iOS 27; en otras versiones puedes importar un registro válido. Las funciones disponibles dependen del iPhone y su versión de iOS.</p>
@@ -2506,31 +2239,41 @@
     <footer class="xf-footer"><span>JASON<span class="xf-footer-accent">XIT</span></span><span>XITFORGE · iOS</span></footer>
   </main>
 
+  <!-- El servidor de XITFORGE verifica Linkvertise y aplica el límite de reclamos. -->
+  <dialog class="xf-access-dialog xf-key-dialog" id="key-gratis" aria-labelledby="freeKeyTitle">
+    <div class="xf-key-header">
+      <h2 id="freeKeyTitle">Obtén una nueva llave</h2>
+      <form method="dialog"><button class="xf-dialog-close" type="submit" aria-label="Cerrar ventana de key gratis" autofocus><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></form>
+    </div>
+    <div class="xf-key-body">
+      <div class="xf-key-provider">
+        <span class="xf-key-provider-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m10 13 4-4m-6 6-1 1a3.5 3.5 0 0 1-5-5l4-4a3.5 3.5 0 0 1 5 0m2 10a3.5 3.5 0 0 0 5 0l4-4a3.5 3.5 0 0 0-5-5l-1 1" transform="translate(1 0)"/></svg></span>
+        <div class="xf-key-provider-copy">
+          <h3>Anuncio de enlace</h3>
+          <span class="xf-key-recommended">Recomendado</span>
+        </div>
+        <button class="xf-key-action" id="freeKeyStart" type="button" aria-label="Continuar a Linkvertise" aria-describedby="freeKeyMessage freeKeyCountdown"><span id="freeKeyStartLabel">Continuar</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></button>
+      </div>
+      <p class="xf-key-feedback" id="freeKeyMessage" role="status" aria-live="polite"></p>
+      <div class="xf-key-result" id="freeKeyResult" hidden>
+        <label for="freeKeyValue">Tu key</label>
+        <button class="xf-key-copy" id="freeKeyCopy" type="button">Copiar</button>
+        <input id="freeKeyValue" type="text" readonly autocomplete="off" spellcheck="false" aria-label="Key de XITFORGE para copiar">
+      </div>
+      <p class="xf-key-countdown" id="freeKeyCountdown" hidden></p>
+    </div>
+  </dialog>
 
+  <!-- Agregar el video de activación de XITFORGE cuando se proporcione. -->
   <dialog class="xf-access-dialog" id="video-activacion" aria-labelledby="activationVideoTitle" aria-describedby="activationVideoDescription">
     <div class="xf-access-card">
       <div class="xf-access-top">
         <span class="xf-access-icon"><svg class="xf-menu-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m10 9 5 3-5 3V9Z"/></svg></span>
-        <div class="xf-dialog-actions"><span class="xf-access-status">Disponible</span><form method="dialog"><button class="xf-dialog-close" type="submit" aria-label="Cerrar ventana de video de activación" autofocus><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></form></div>
+        <div class="xf-dialog-actions"><span class="xf-access-status">Pendiente</span><form method="dialog"><button class="xf-dialog-close" type="submit" aria-label="Cerrar ventana de video de activación" autofocus><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></form></div>
       </div>
       <h2 id="activationVideoTitle">Video de activación</h2>
-      <p id="activationVideoDescription">Mira este video para ver cómo activar XITFORGE.</p>
-      <div class="xf-activation-video-frame" id="activationVideoFrame">
-        <video id="activationVideo" controls preload="metadata" playsinline webkit-playsinline>
-          <source src="/video/INSTALACION.mp4" type="video/mp4">
-          Tu navegador no puede reproducir este video.
-        </video>
-        <div class="xf-video-controls" aria-label="Controles del video">
-          <button class="xf-video-control" id="activationPlayBtn" type="button" aria-label="Reproducir o pausar video">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7L8 5Z"/></svg>
-            <span id="activationPlayLabel">Reproducir</span>
-          </button>
-          <button class="xf-video-control" id="activationFullscreenBtn" type="button" aria-label="Abrir video en pantalla completa">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/></svg>
-            <span>Pantalla completa</span>
-          </button>
-        </div>
-      </div>
+      <p id="activationVideoDescription">El video de activación de XITFORGE todavía no está disponible en esta página.</p>
+      <a class="xf-text-link" href="#contacto">Consultar la activación <span aria-hidden="true">→</span></a>
     </div>
   </dialog>
 
@@ -2542,51 +2285,120 @@
   const menuBackdrop = document.getElementById("menuBackdrop");
   const pageContent = document.getElementById("pageContent");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const activationVideoDialog = document.getElementById("video-activacion");
-  const activationVideo = document.getElementById("activationVideo");
-  const activationVideoFrame = document.getElementById("activationVideoFrame");
-  const activationPlayBtn = document.getElementById("activationPlayBtn");
-  const activationPlayLabel = document.getElementById("activationPlayLabel");
-  const activationFullscreenBtn = document.getElementById("activationFullscreenBtn");
-
-  function syncActivationPlayLabel() {
-    if (!activationVideo || !activationPlayLabel) return;
-    activationPlayLabel.textContent = activationVideo.paused ? "Reproducir" : "Pausar";
+  const freeApi = "https://xitforge-license-server.onrender.com";
+  const freeDialog = document.getElementById("key-gratis");
+  const freeStart = document.getElementById("freeKeyStart");
+  const freeStartLabel = document.getElementById("freeKeyStartLabel");
+  const freeMessage = document.getElementById("freeKeyMessage");
+  const freeResult = document.getElementById("freeKeyResult");
+  const freeValue = document.getElementById("freeKeyValue");
+  const freeCountdown = document.getElementById("freeKeyCountdown");
+  const receiptStorage = "xitforge.freeKey.receipt.v1";
+  let freeReceipt = "", freeStartUrl = "", freeLoading = false;
+  let nextClaimAt = 0, serverOffset = 0, freeNotice = "";
+  try { freeReceipt = sessionStorage.getItem(receiptStorage) || ""; } catch {}
+  function rememberReceipt(value) {
+    freeReceipt = value;
+    try {
+      if (value) sessionStorage.setItem(receiptStorage, value);
+      else sessionStorage.removeItem(receiptStorage);
+    } catch {}
   }
-
-  activationPlayBtn?.addEventListener("click", async () => {
-    if (!activationVideo) return;
+  async function freeRequest(path, receipt = "") {
+    const response = await fetch(freeApi + path, {
+      cache: "no-store", credentials: "omit", referrerPolicy: "no-referrer",
+      signal: AbortSignal.timeout(35000),
+      headers: receipt ? { Authorization: "Bearer " + receipt } : {}
+    });
+    if (response.status === 404 && path === "/api/free-key/config") {
+      const error = new Error("free_key_not_ready");
+      error.code = "not_ready";
+      throw error;
+    }
+    const data = await response.json();
+    if (!response.ok || !data.ok) {
+      const error = new Error("free_key_request");
+      error.code = data.error || "server_error";
+      throw error;
+    }
+    return data;
+  }
+  function updateFreeCountdown() {
+    const remaining = Math.max(0, nextClaimAt - Date.now() - serverOffset);
+    freeStart.disabled = freeLoading || remaining > 0;
+    freeStart.setAttribute("aria-busy", String(freeLoading));
+    freeStartLabel.textContent = freeLoading ? "Espera…" : "Continuar";
+    freeCountdown.hidden = remaining <= 0;
+    if (remaining > 0) {
+      const seconds = Math.ceil(remaining / 1000);
+      const hours = String(Math.floor(seconds / 3600)).padStart(2, "0");
+      const minutes = String(Math.floor(seconds / 60) % 60).padStart(2, "0");
+      const last = String(seconds % 60).padStart(2, "0");
+      freeCountdown.textContent = "Disponible en " + hours + ":" + minutes + ":" + last;
+    } else {
+      freeCountdown.textContent = "";
+    }
+  }
+  async function refreshFreeKey(continueToAds = false) {
+    if (freeLoading) return;
+    freeLoading = true;
+    let canContinue = false;
+    updateFreeCountdown();
     try {
-      if (activationVideo.paused) await activationVideo.play();
-      else activationVideo.pause();
-    } catch {}
-    syncActivationPlayLabel();
+      const config = await freeRequest("/api/free-key/config");
+      freeStartUrl = config.enabled && config.startUrl === freeApi + "/free-key/start"
+        ? config.startUrl : "";
+      if (freeReceipt) {
+        try {
+          const result = await freeRequest("/api/free-key/receipt", freeReceipt);
+          const serverTime = Date.parse(result.serverNow);
+          const nextTime = Date.parse(result.nextClaimAt);
+          if (!Number.isFinite(serverTime) || !Number.isFinite(nextTime)) throw new Error("invalid_receipt");
+          serverOffset = serverTime - Date.now();
+          nextClaimAt = nextTime;
+          const hasKey = /^[A-Z0-9]{4}(?:-[A-Z0-9]{4}){3}$/.test(result.key || "");
+          freeResult.hidden = !hasKey;
+          freeValue.value = hasKey ? result.key : "";
+          freeMessage.textContent = hasKey ? "" : "Esta key ya no está disponible.";
+        } catch (error) {
+          if (error.code !== "receipt_expired") throw error;
+          rememberReceipt("");
+          freeResult.hidden = true;
+          freeValue.value = "";
+        }
+      }
+      if (freeNotice) freeMessage.textContent = freeNotice;
+      else if (continueToAds && !freeStartUrl) freeMessage.textContent = "Las keys aún no están disponibles.";
+      canContinue = continueToAds && Boolean(freeStartUrl) && nextClaimAt <= Date.now() + serverOffset;
+    } catch (error) {
+      freeStartUrl = "";
+      freeMessage.textContent = freeNotice || (error.code === "not_ready"
+        ? "Las keys aún no están disponibles."
+        : "No se pudo conectar. Inténtalo de nuevo.");
+    } finally {
+      freeLoading = false;
+      updateFreeCountdown();
+    }
+    if (canContinue && freeDialog.open) window.location.assign(freeStartUrl);
+  }
+  freeStart.addEventListener("click", () => {
+    if (freeLoading || nextClaimAt > Date.now() + serverOffset) return;
+    freeNotice = "";
+    freeMessage.textContent = "";
+    refreshFreeKey(true);
   });
-
-  activationVideo?.addEventListener("play", syncActivationPlayLabel);
-  activationVideo?.addEventListener("pause", syncActivationPlayLabel);
-  activationVideo?.addEventListener("ended", syncActivationPlayLabel);
-
-  activationFullscreenBtn?.addEventListener("click", async () => {
-    if (!activationVideo) return;
+  document.getElementById("freeKeyCopy").addEventListener("click", async () => {
+    if (!freeValue.value) return;
     try {
-      if (typeof activationVideo.webkitEnterFullscreen === "function") {
-        activationVideo.webkitEnterFullscreen();
-        return;
-      }
-      const target = activationVideoFrame || activationVideo;
-      if (target.requestFullscreen) {
-        await target.requestFullscreen();
-      } else if (target.webkitRequestFullscreen) {
-        target.webkitRequestFullscreen();
-      }
-    } catch {}
+      await navigator.clipboard.writeText(freeValue.value);
+      freeMessage.textContent = "Key copiada.";
+    } catch {
+      freeValue.focus();
+      freeValue.select();
+      freeMessage.textContent = "Mantén pulsada la key para copiarla.";
+    }
   });
-
-  activationVideoDialog?.addEventListener("close", () => {
-    activationVideo?.pause();
-    syncActivationPlayLabel();
-  });
+  setInterval(() => { if (freeDialog.open) updateFreeCountdown(); }, 1000);
   function setMenu(open, restoreFocus = true) {
     document.body.classList.toggle("menu-open", open);
     menuToggle.setAttribute("aria-expanded", String(open));
@@ -2615,6 +2427,12 @@
       setMenu(false);
       dialog.showModal();
       document.body.classList.add("xf-dialog-open");
+      if (dialog === freeDialog) {
+        freeNotice = "";
+        freeMessage.textContent = "";
+        updateFreeCountdown();
+        if (freeReceipt) refreshFreeKey();
+      }
     });
   });
   document.querySelectorAll(".xf-access-dialog").forEach(dialog => {
@@ -2653,8 +2471,35 @@
       }
     }
   });
+  if (window.location.hash === "#key-gratis" || window.location.hash.startsWith("#key-gratis?")) {
+    const params = new URLSearchParams(window.location.hash.split("?")[1] || "");
+    const receipt = params.get("receipt");
+    if (receipt && /^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(receipt) && receipt.length <= 512) rememberReceipt(receipt);
+    const errors = {
+      not_ready: "Las keys aún no están disponibles.",
+      session_missing: "Pulsa Continuar y usa el mismo navegador.",
+      session_expired: "La sesión venció. Pulsa Continuar otra vez.",
+      ads_not_verified: "Completa los anuncios para recibir tu key.",
+      verification_failed: "No se pudo verificar. Inténtalo de nuevo.",
+      server_error: "No se pudo recibir la key. Inténtalo de nuevo."
+    };
+    freeNotice = errors[params.get("error")] || "";
+    const waitUntil = Number(params.get("waitUntil"));
+    if (Number.isFinite(waitUntil) && waitUntil > Date.now()) {
+      nextClaimAt = waitUntil;
+    }
+    // A receipt is a private capability; remove it from the visible URL immediately.
+    history.replaceState(null, "", window.location.pathname + window.location.search + "#key-gratis");
+    setMenu(false);
+    freeDialog.showModal();
+    document.body.classList.add("xf-dialog-open");
+    freeMessage.textContent = freeNotice;
+    updateFreeCountdown();
+    if (freeReceipt) refreshFreeKey();
+  }
 })();
 </script>
 
 </body>
 </html>
+
